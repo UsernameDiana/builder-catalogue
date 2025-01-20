@@ -110,15 +110,16 @@ def get_colors():
 ############# User available Sets API #############
 def fetch_user_inventory(user_id: int):
     with SessionLocal() as db:
-        return db.query(Inventory).filter(Inventory.user_id == user_id).all()
+        inventory = db.query(Inventory).filter(Inventory.user_id == user_id).all()
+        return inventory
 
 def fetch_set_pieces(set_id: int):
     with SessionLocal() as db:
-        return db.query(SetPiece).filter(SetPiece.set_id == set_id).all()
-
+        set_pieces = db.query(SetPiece).filter(SetPiece.set_id == set_id).all()
+        return set_pieces
 
 def can_build_set(user_inventory, set_pieces):
-    inventory_dict = {(item.piece_id, item.color_name): item.quantity for item in user_inventory}
+    inventory_dict = {(item.piece_id, item.color_code): item.quantity for item in user_inventory}
     for sp in set_pieces:
         key = (sp.piece_id, sp.color_code)
         if key not in inventory_dict or inventory_dict[key] < sp.quantity:
@@ -130,9 +131,9 @@ def can_build_set(user_inventory, set_pieces):
     "/user/{name}/buildable-sets",
     description="Get sets that the user can build with their inventory"
 )
-def get_buildable_sets(user_name: str):
+def get_buildable_sets(name: str):
     with SessionLocal() as db:
-        user = db.query(User).filter(User.name == user_name).first()
+        user = db.query(User).filter(User.name == name).first()
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
 
@@ -143,4 +144,4 @@ def get_buildable_sets(user_name: str):
         if can_build_set(user_inventory, fetch_set_pieces(set_item.set_id))
     ]
 
-    return f"{user_name} can build the following sets: {', '.join(buildable_sets)}"
+    return {"message": f"{name} can build", "sets": buildable_sets}

@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Builder Catalogue Deployment
 
 on:
   push:

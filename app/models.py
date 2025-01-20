@@ -50,6 +50,6 @@ class Inventory(Base):
     __tablename__ = "inventory"
     user_id = Column(Integer, ForeignKey("users.user_id"), primary_key=True)
     piece_id = Column(Integer, ForeignKey("pieces.piece_id"), primary_key=True)
-    color_name = Column(String, ForeignKey("colors.color_name"), primary_key=True)
+    color_code = Column(Integer, ForeignKey("colors.color_code"), primary_key=True)
     piece_part_number = Column(Integer, ForeignKey("pieces.part_number"))
     quantity = Column(Integer)
