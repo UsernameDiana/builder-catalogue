@@ -51,5 +51,5 @@ class Inventory(Base):
     user_id = Column(Integer, ForeignKey("users.user_id"), primary_key=True)
     piece_id = Column(Integer, ForeignKey("pieces.piece_id"), primary_key=True)
     color_name = Column(String, ForeignKey("colors.color_name"), primary_key=True)
-    piece_part_number = Column(Integer, ForeignKey("pieces.part_number"), primary_key=True)
+    piece_part_number = Column(Integer, ForeignKey("pieces.part_number"))
     quantity = Column(Integer)
