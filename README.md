@@ -24,6 +24,7 @@ The application has the following endpoints:
 
 ### Swagger UI
 
+![Screenshot 2025-01-20 at 13 23 28](https://github.com/user-attachments/assets/0e4a40b4-0147-4d7b-9928-65d07d819033)
 
 ## Database
 
@@ -32,6 +33,7 @@ The database URL is configured in the app/database.py file.
 
 ### ER Diagram
 
+![Screenshot 2025-01-20 at 13 39 08](https://github.com/user-attachments/assets/62d8b514-3a1c-4529-80d6-9073e9ac1263)
 
 ## Dependencies
 
