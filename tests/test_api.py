@@ -37,3 +37,9 @@ def test_get_buildable_sets(setup_module):
         "message": "test_user can build",
         "sets": ["Test Set"]
     }
+
+
+def test_get_buildable_sets_user_not_found(setup_module):
+    response = client.get("/api/user/im_not_a_user/buildable-sets")
+    assert response.status_code == 404
+    assert response.json() == {"detail": "User not found"}

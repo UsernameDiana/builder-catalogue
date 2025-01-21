@@ -33,7 +33,7 @@ The database URL is configured in the app/database.py file.
 
 ### ER Diagram
 
-![Screenshot 2025-01-20 at 13 39 08](https://github.com/user-attachments/assets/62d8b514-3a1c-4529-80d6-9073e9ac1263)
+![Screenshot 2025-01-21 at 12 38 34](https://github.com/user-attachments/assets/9629e590-ae01-4ed3-9e42-5f25449f1482)
 
 ## Dependencies
 
@@ -46,7 +46,7 @@ uvicorn
 pydantic
 sqlalchemy
 databases
-alembic
+pytest
 ```
 
 ## Project Structure
@@ -57,3 +57,4 @@ alembic
 - `app/database.py`: Configures the database connection and session.
 - `run_app.sh`: Script to run the FastAPI application.
 - `requirements.txt`: Lists the project dependencies.
+- `tests/`: Contains the unit tests for the api.
