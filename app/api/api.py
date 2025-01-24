@@ -41,7 +41,7 @@ def get_user_by_id(user_id: int):
             "inventory": [
                 {
                     "piece_id": item.piece_id,
-                    "color_name": item.color_name,
+                    "color_code": item.color_code,
                     "piece_part_number": item.piece_part_number,
                     "quantity": item.quantity
                 }
@@ -144,4 +144,4 @@ def get_buildable_sets(name: str):
         if can_build_set(user_inventory, fetch_set_pieces(set_item.set_id))
     ]
 
-    return {"message": f"{name} can build", "sets": buildable_sets}
+    return {"message": f"Results of buildable sets for user {name}", "sets": buildable_sets}
