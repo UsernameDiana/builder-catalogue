@@ -15,6 +15,7 @@ def test_get_users():
 
 @pytest.fixture(scope="module")
 def setup_module():
+    Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     with SessionLocal() as db:
         entities = [
@@ -27,8 +28,7 @@ def setup_module():
         ]
 
         for model, data in entities:
-            if not db.query(model).filter_by(**data).first():
-                db.add(model(**data))
+            db.add(model(**data))
 
         db.commit()
     yield
@@ -44,14 +44,7 @@ def test_get_buildable_sets(setup_module):
     }
 
 
-@pytest.fixture(scope="module")
-def setup_module_user_not_found():
-    Base.metadata.create_all(bind=engine)
-    yield
-    Base.metadata.drop_all(bind=engine)
-
-
-def test_get_buildable_sets_user_not_found(setup_module_user_not_found):
+def test_get_buildable_sets_user_not_found(setup_module):
     response = client.get("/api/user/im_not_a_user/buildable-sets")
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}
