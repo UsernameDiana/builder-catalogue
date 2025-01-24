@@ -44,7 +44,14 @@ def test_get_buildable_sets(setup_module):
     }
 
 
-def test_get_buildable_sets_user_not_found(setup_module):
+@pytest.fixture(scope="module")
+def setup_module_user_not_found():
+    Base.metadata.create_all(bind=engine)
+    yield
+    Base.metadata.drop_all(bind=engine)
+
+
+def test_get_buildable_sets_user_not_found(setup_module_user_not_found):
     response = client.get("/api/user/im_not_a_user/buildable-sets")
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}

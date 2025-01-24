@@ -47,6 +47,7 @@ pydantic
 sqlalchemy
 databases
 pytest
+httpx
 ```
 
 ## Project Structure
